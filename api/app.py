@@ -1,0 +1,24 @@
+from flask import Flask
+from config import config
+from db import mysql
+
+# ? Importación de todos los bluprints
+from routes.users import user_dp
+from routes.user_detail import user_detail_dp
+
+app = Flask(__name__)
+mysql.init_app(app)
+
+# * Registrar todos los Bluprints (rutas)
+app.register_blueprint(user_dp)
+app.register_blueprint(user_detail_dp)
+
+
+def not_found(error):
+    return "<h1>La página no existe...<h1>", 404
+
+
+if __name__ == "__main__":
+    app.config.from_object(config["development"])
+    app.register_error_handler(404, not_found)
+    app.run(port=5000)
