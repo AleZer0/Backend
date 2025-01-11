@@ -13,13 +13,10 @@ SELECT
     u.nombre,
     u.apellido,
     ud.foto,
-    ud.puesto,
-    a.fecha,
-    a.tipoAcceso
+    ud.puesto
 FROM `user_detail` ud
 JOIN `user` u ON ud.idUser = u.idUser
-JOIN `access` a ON ud.idUser = a.idUser
-ORDER BY ud.idUser, a.fecha;
+ORDER BY ud.idUser;
 
 SELECT
 	ud.idUser,
@@ -40,7 +37,7 @@ FROM `user_detail` ud
 JOIN `user` u ON ud.idUser = u.idUser
 WHERE ud.idUser = 20;
 
-SELECT GROUP_CONCAT(COLUMN_NAME) AS columnas
+SELECT COLUMN_NAME AS columnas
 FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = 'checador_xrom' 
+WHERE TABLE_SCHEMA = 'accesos_xrom' 
 AND TABLE_NAME = 'user_detail';

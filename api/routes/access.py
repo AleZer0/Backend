@@ -41,8 +41,8 @@ def get_all_user_access():
             return (
                 jsonify(
                     {
-                        "access": access,
-                        "message": "Todos los accesos de los usuarios filtrados por fecha.",
+                        "accesos": access,
+                        "mensaje": "Todos los accesos de los usuarios filtrados por fecha.",
                         "success": True,
                     }
                 ),
@@ -50,6 +50,6 @@ def get_all_user_access():
             )
     except Exception as ex:
         return (
-            jsonify({"message": str(ex), "success": False}),
+            jsonify({"mensaje": str(ex), "success": False}),
             500,
         )

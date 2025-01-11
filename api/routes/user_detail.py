@@ -27,19 +27,17 @@ def get_all_users():
             users = [
                 {
                     "idUser": record[0],
-                    "name": record[1],
+                    "nombre": record[1],
                     "apellido": record[2],
                     # "foto": str(record[3]),
                     "puesto": record[4],
                 }
                 for record in data
             ]
-            return jsonify({"users": users, "success": True}), 200
+            return jsonify({"usuarios": users, "success": True}), 200
     except Exception as ex:
         return (
-            jsonify(
-                {"error": "An error occurred", "message": str(ex), "success": False}
-            ),
+            jsonify({"mensaje": str(ex), "success": False}),
             500,
         )
 
@@ -49,7 +47,7 @@ def get_all_users():
 def delete_user(idUser: int):
     if get_one("user", "idUser", idUser) is None:
         return (
-            jsonify({"message": f"El usuario '{idUser}' no existe.", "success": False}),
+            jsonify({"mensaje": f"El usuario '{idUser}' no existe.", "success": False}),
             404,
         )
 
@@ -66,10 +64,10 @@ def delete_user(idUser: int):
             )
             mysql.connection.commit()
             return jsonify(
-                {"message": "El usuario se elimino correctamente.", "success": True}
+                {"mensaje": "El usuario se elimino correctamente.", "success": True}
             )
     except Exception as ex:
         return (
-            jsonify({"message": str(ex), "success": False}),
+            jsonify({"mensaje": str(ex), "success": False}),
             500,
         )
