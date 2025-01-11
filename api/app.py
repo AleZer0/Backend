@@ -3,15 +3,15 @@ from config import config
 from db import mysql
 
 # ? Importación de todos los bluprints
-from routes.users import user_dp
 from routes.user_detail import user_detail_dp
+from routes.access import access_dp
 
 app = Flask(__name__)
 mysql.init_app(app)
 
 # * Registrar todos los Bluprints (rutas)
-app.register_blueprint(user_dp)
 app.register_blueprint(user_detail_dp)
+app.register_blueprint(access_dp)
 
 
 def not_found(error):
