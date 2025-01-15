@@ -18,11 +18,17 @@ FROM `user_detail` ud
 JOIN `user` u ON ud.idUser = u.idUser
 ORDER BY ud.idUser;
 
+SELECT * FROM `user`;
+
 SELECT
 	ud.idUser,
+    u.nombre,
+    u.apellido,
+    ud.foto,
     a.fecha,
     a.tipoAcceso
 FROM `user_detail` ud
+JOIN `user` u ON ud.idUser = u.idUser
 JOIN `access` a ON ud.idUser = a.idUser
 ORDER BY ud.idUser, a.fecha;
 

@@ -16,7 +16,7 @@ def get_all_users():
                     ud.idUser,
                     u.nombre,
                     u.apellido,
-                    -- ud.foto,
+                    ud.foto,
                     ud.puesto
                 FROM `user_detail` ud
                 JOIN `user` u ON ud.idUser = u.idUser
@@ -29,8 +29,8 @@ def get_all_users():
                     "idUser": record[0],
                     "nombre": record[1],
                     "apellido": record[2],
-                    # "foto": str(record[3]),
-                    "puesto": record[3],
+                    "foto": str(record[3]),
+                    "puesto": record[4],
                 }
                 for record in data
             ]

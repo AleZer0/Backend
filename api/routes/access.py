@@ -14,8 +14,11 @@ def get_all_user_access():
                 """
                 SELECT
                     ud.idUser,
+                    u.nombre,
+                    u.apellido,
                     a.fecha,
                     a.tipoAcceso
+                    -- ud.foto
                 FROM `user_detail` ud
                 JOIN `user` u ON ud.idUser = u.idUser
                 JOIN `access` a ON ud.idUser = a.idUser
@@ -28,20 +31,25 @@ def get_all_user_access():
             for record in data:
                 idUser: str = str(record[0])
                 if idUser not in access:
-                    access[idUser] = {}
+                    access[idUser] = {
+                        "idUser": record[0],
+                        "nombre": record[1],
+                        "apellidos": record[2],
+                        "accesos": {},
+                    }
 
-                fecha, hora = separar_timestamp(record[1])
-                if fecha not in access[idUser]:
-                    access[idUser][fecha] = {}
+                fecha, hora = separar_timestamp(record[3])
+                if fecha not in access[idUser]["accesos"]:
+                    access[idUser]["accesos"][fecha] = {}
 
-                acces_type = record[2]
-                access[idUser][fecha][acces_type] = hora
+                acces_type = record[4]
+                access[idUser]["accesos"][fecha][acces_type] = hora
 
-            access = [{user_id: data} for user_id, data in access.items()]
+            access = [{"user": data} for data in access.values()]
             return (
                 jsonify(
                     {
-                        "accesos": access,
+                        "data": access,
                         "mensaje": "Todos los accesos de los usuarios filtrados por fecha.",
                         "success": True,
                     }
