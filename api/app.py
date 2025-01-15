@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from config import config
 from db import mysql
 
@@ -7,6 +8,7 @@ from routes.user_detail import user_detail_dp
 from routes.access import access_dp
 
 app = Flask(__name__)
+CORS(app)
 mysql.init_app(app)
 
 # * Registrar todos los Bluprints (rutas)
