@@ -26,7 +26,8 @@ SELECT
     u.apellido,
     ud.foto,
     a.fecha,
-    a.tipoAcceso
+    a.tipoAcceso,
+    WEEK(a.fecha, 1) AS semana
 FROM `user_detail` ud
 JOIN `user` u ON ud.idUser = u.idUser
 JOIN `access` a ON ud.idUser = a.idUser
