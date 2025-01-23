@@ -139,11 +139,11 @@ def delete_user(idUser: int):
     try:
         with mysql.connection.cursor() as cursor:
             cursor.execute(
-                "DELETE FROM `user` WHERE `idUser` = %s",
+                "DELETE FROM `user_detail` WHERE `idUser` = %s",
                 (idUser,),
             )
             cursor.execute(
-                "DELETE FROM `user_detail` WHERE `idUser` = %s",
+                "DELETE FROM `user` WHERE `idUser` = %s",
                 (idUser,),
             )
             mysql.connection.commit()
@@ -152,6 +152,6 @@ def delete_user(idUser: int):
             )
     except Exception as ex:
         return (
-            jsonify({"mensaje": str(ex), "success": False}),
+            jsonify({"mensaje": "Error?: " + ex, "success": False}),
             500,
         )
