@@ -1,16 +1,21 @@
 from datetime import datetime
+import base64, re
 from db import mysql
 
 
-def separar_timestamp(fecha_hora: datetime) -> str:
+def separar_timestamp(fecha_hora: str) -> str:
     return str(fecha_hora.date()), str(fecha_hora.time())
+
+
+def decode_image(longblob_data: bytes) -> bytes:
+    return base64.b64encode(longblob_data).decode("utf-8")
 
 
 def get_one(table: str, name_id: str, id: int) -> dict | None:
     query_columns = """
             SELECT COLUMN_NAME
             FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_SCHEMA = 'accesos_xrom'
+            WHERE TABLE_SCHEMA = 'cheacdor-xrom'
             AND TABLE_NAME = %s;
         """
     query_data = f"SELECT * FROM `{table}` WHERE `{name_id}` = %s"
