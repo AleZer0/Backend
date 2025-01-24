@@ -32,7 +32,7 @@ SELECT
 FROM `user_detail` ud
 JOIN `user` u ON ud.idUser = u.idUser
 JOIN `access` a ON ud.idUser = a.idUser
-WHERE WEEK(a.fecha, 1) = 53
+WHERE WEEK(a.fecha, 1) = 53 AND a.tipoAcceso = "Almuerzo"
 ORDER BY ud.idUser, a.fecha;
 
 SELECT
