@@ -12,17 +12,6 @@ def get_user_access(idUser: int):
     try:
         accesses = Access.query.filter_by(idUser=idUser).order_by(Access.fecha).all()
 
-        if not accesses:
-            return (
-                jsonify(
-                    {
-                        "mensaje": f"El usuario con ID {idUser} no tiene accesos.",
-                        "success": False,
-                    }
-                ),
-                404,
-            )
-
         accesos = []
         for access in accesses:
             fecha, hora = separar_timestamp(access.fecha)
